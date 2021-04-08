@@ -1,0 +1,13 @@
+{
+    "name": "amela/se_project",
+    "description": "software engineering project",
+    "type": "project",
+    "license": "apache2",
+    "authors": [
+        {
+            "name": "KospoAmela",
+            "email": "kospoamela1@gmail.com"
+        }
+    ],
+    "require": {}
+}
