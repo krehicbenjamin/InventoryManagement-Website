@@ -14,6 +14,11 @@ class SupplierDao extends BaseDao
         return $this->queryUnique("SELECT * FROM suppliers WHERE id = :id", ["id" => $id]);
     }
 
+    public function getSuppliersByName($name)
+    {
+        return $this->queryUnique("SELECT * FROM suppliers WHERE name = :name", ["name" => $name]);
+    }
+
     public function insertSupplier($supplier)
     {
         $this->insert($supplier, "suppliers");
