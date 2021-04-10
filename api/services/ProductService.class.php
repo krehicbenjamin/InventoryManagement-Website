@@ -30,4 +30,8 @@ class ProductService extends BaseService
     public function update($id, $product){
         return parent::update($id, $product);
     }
+
+    public function getById($id){
+        return parent::getById($id);
+    }
 }
