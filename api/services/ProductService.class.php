@@ -6,7 +6,7 @@ require_once dirname(__FILE__)."/../dao/SupplierDao.class.php";
 
 class ProductService extends BaseService
 {
-    private SupplierDao;
+    private supplierDao;
 
     public function __construct()
     {
@@ -24,7 +24,13 @@ class ProductService extends BaseService
 
     public function add($product){
         if(!isset($product['name'])) throw new \Exception("Name is missing", 1);
-        return parent::add($product);
+        $supplier = $this->supplierDao->getSuppliersByName($product['supplier_name']);
+
+        return parent::add([
+            'name' => $product['name'],
+            'current_quantity' => $product['current_quantity'],
+            'supplier_id' => $supplier['id']
+        ]);
     }
 
     public function update($id, $product){
