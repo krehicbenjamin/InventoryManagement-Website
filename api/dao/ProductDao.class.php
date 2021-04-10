@@ -29,4 +29,8 @@ class ProductDao extends BaseDao
                              ["supplier_id" => $search]);
     }
 
+    public function getAllProductsPaginated($offset = 0, $limit = 30){
+      return $this->getAllPaginated("products", $offset, $limit);
+    }
+
 }
