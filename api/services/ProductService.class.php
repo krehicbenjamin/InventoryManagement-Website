@@ -14,15 +14,19 @@ class ProductService extends BaseService
         $this->SupplierDao = new SupplierDao();
     }
 
-    public function getProducts($search, $offset, $limit){
-        if($search){
+    public function getProducts($search, $offset, $limit)
+    {
+        if($search)
+        {
             return $this->dao->searchProductsByName($search, $offset, $limit);
-        }else{
+        }else
+        {
             return $this->dao->getAllProductsPaginated($offset, $limit);
         }
     }
 
-    public function add($product){
+    public function add($product)
+    {
         if(!isset($product['name'])) throw new \Exception("Name is missing", 1);
         $supplier = $this->supplierDao->getSuppliersByName($product['supplier_name']);
 
@@ -33,11 +37,13 @@ class ProductService extends BaseService
         ]);
     }
 
-    public function update($id, $product){
+    public function update($id, $product)
+    {
         return parent::update($id, $product);
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         return parent::getById($id);
     }
 }
