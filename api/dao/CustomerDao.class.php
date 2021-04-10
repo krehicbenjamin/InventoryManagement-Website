@@ -29,4 +29,9 @@ class CustomerDao extends BaseDao
                              ["name" => $search]);
     }
 
+    public function getAllCustomersPaginated($offset = 0, $limit = 30)
+    {
+      return $this->getAllPaginated("customers", $offset, $limit);
+    }
+
 }

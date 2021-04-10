@@ -67,20 +67,24 @@ class BaseDao
         return $this->query($query, []);
     }
 
-    protected function getAllPaginated($tableName, $offset = 0, $limit = 25){
+    protected function getAllPaginated($tableName, $offset = 0, $limit = 25)
+    {
         $query = "SELECT * FROM ".$tableName." LIMIT ".$limit." OFFSET ".$offset;
         return $this->query($query, []);
     }
 
-    public function update($id, $entity){
+    public function update($id, $entity)
+    {
       $this->executeUpdate($this->table, $id, $entity);
     }
 
-    public function getById($id){
+    public function getById($id)
+    {
         return $this->queryUnique("SELECT * FROM ".$this->table." WHERE id = :id", ["id" => $id]);
     }
 
-    public function add($entity){
+    public function add($entity)
+    {
         return $this->insert($this->table, $entity);
     }
 

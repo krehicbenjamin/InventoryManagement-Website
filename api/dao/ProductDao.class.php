@@ -19,17 +19,20 @@ class ProductDao extends BaseDao
         $this->insert($product, "products");
     }
 
-    public function getAllProducts(){
+    public function getAllProducts()
+    {
         return $this->getAll("products");
     }
 
-    public function searchProductsBySupplier($search){
+    public function searchProductsBySupplier($search)
+    {
         return $this->query("SELECT * FROM products
                              WHERE supplier_id LIKE CONCAT('%', :supplier_id, '%')",
                              ["supplier_id" => $search]);
     }
 
-    public function getAllProductsPaginated($offset = 0, $limit = 30){
+    public function getAllProductsPaginated($offset = 0, $limit = 30)
+    {
       return $this->getAllPaginated("products", $offset, $limit);
     }
 

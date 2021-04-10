@@ -19,11 +19,13 @@ class ProductDao extends BaseDao
         $this->insert($product, "products");
     }
 
-    public function getAllProducts(){
+    public function getAllProducts()
+    {
         return $this->getAll("products");
     }
 
-    public function searchProductsByName($search){
+    public function searchProductsByName($search)
+    {
         return $this->query("SELECT * FROM products
                              WHERE name LIKE CONCAT('%', :name, '%')",
                              ["name" => $search]);

@@ -19,11 +19,13 @@ class OrderDao extends BaseDao
         $this->insert($order, "orders");
     }
 
-    public function getAllOrders(){
+    public function getAllOrders()
+    {
         return $this->getAll("orders");
     }
 
-    public function searchOrdersByCustomer($search){
+    public function searchOrdersByCustomer($search)
+    {
         return $this->query("SELECT * FROM orders
                              WHERE customer_id LIKE CONCAT('%', :customer_id, '%')",
                              ["customer_id" => $search]);

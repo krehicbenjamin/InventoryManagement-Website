@@ -24,14 +24,21 @@ class SupplierDao extends BaseDao
         $this->insert($supplier, "suppliers");
     }
 
-    public function getAllSuppliers(){
+    public function getAllSuppliers()
+    {
         return $this->getAll("suppliers");
     }
 
-    public function searchSuppliersByName($search){
+    public function searchSuppliersByName($search)
+    {
         return $this->query("SELECT * FROM suppliers
                              WHERE name LIKE CONCAT('%', :name, '%')",
                              ["name" => $search]);
+    }
+
+    public function getAllSuppliersPaginated($offset = 0, $limit = 30)
+    {
+      return $this->getAllPaginated("suppliers", $offset, $limit);
     }
 
 }
