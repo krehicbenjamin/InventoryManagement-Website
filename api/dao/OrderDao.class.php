@@ -31,4 +31,9 @@ class OrderDao extends BaseDao
                              ["customer_id" => $search]);
     }
 
+    public function getAllOrdersPaginated($offset = 0, $limit = 30)
+    {
+      return $this->getAllPaginated("orders", $offset, $limit);
+    }
+
 }
