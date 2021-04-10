@@ -26,4 +26,8 @@ class ProductService extends BaseService
         if(!isset($product['name'])) throw new \Exception("Name is missing", 1);
         return parent::add($product);
     }
+
+    public function update($id, $product){
+        return parent::update($id, $product);
+    }
 }
