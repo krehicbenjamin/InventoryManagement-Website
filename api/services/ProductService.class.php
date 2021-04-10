@@ -14,5 +14,11 @@ class ProductService extends BaseService
         $this->SupplierDao = new SupplierDao();
     }
 
-
+    public function getProducts($search, $offset, $limit){
+        if($search){
+            return $this->dao->searchProductsByName($search, $offset, $limit);
+        }else{
+            return $this->dao->getAllProductsPaginated($offset, $limit);
+        }
+    }
 }
