@@ -21,4 +21,9 @@ class ProductService extends BaseService
             return $this->dao->getAllProductsPaginated($offset, $limit);
         }
     }
+
+    public function add($product){
+        if(!isset($product['name'])) throw new \Exception("Name is missing", 1);
+        return parent::add($product);
+    }
 }
