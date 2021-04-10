@@ -10,8 +10,8 @@ class ProductService extends BaseService
 
     public function __construct()
     {
-        $this->dao=new ProductDao();
-        $this->SupplierDao = new SupplierDao();
+        $this->dao = new ProductDao();
+        $this->supplierDao = new SupplierDao();
     }
 
     public function getProducts($search, $offset, $limit)

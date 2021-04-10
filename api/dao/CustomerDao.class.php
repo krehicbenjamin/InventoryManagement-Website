@@ -16,16 +16,16 @@ class CustomerDao extends BaseDao
 
     public function insertCustomer($customer)
     {
-        $this->insert($customer, "customers");
+        return $this->insert("customers", $customer);
     }
 
     public function getAllCustomers(){
         return $this->getAll("customers");
     }
 
-    public function searchCustomersByName($search){
+    public function searchCustomersByName($search, $offset, $limit){
         return $this->query("SELECT * FROM customers
-                             WHERE name LIKE CONCAT('%', :name, '%')",
+                             WHERE name LIKE CONCAT('%', :name, '%') LIMIT ${limit} OFFSET ${offset}",
                              ["name" => $search]);
     }
 

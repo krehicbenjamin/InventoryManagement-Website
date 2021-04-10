@@ -6,7 +6,7 @@ class BaseDao
     protected $connection;
     private $table;
 
-    public function __construct()
+    public function __construct($table)
     {
         $this->table = $table;
         try {
@@ -32,7 +32,7 @@ class BaseDao
 
     protected function executeUpdate($tableName, $id, $table)
     {
-        $query = "UPDATE ".$tableName." SET ";
+        $query = "UPDATE ${tableName} SET ";
         foreach($table as $name => $value){
           $query .= $name. "=:".$name.", ";
         }
@@ -48,7 +48,7 @@ class BaseDao
     protected function insert($tableName, $table)
     {
         $query = "INSERT INTO ".$tableName." (";
-        $values =" VALUES (";
+        $values = " VALUES (";
         foreach ($table as $key => $value) {
             $query .= $key.", ";
             $values .= ":".$key.", ";
@@ -56,7 +56,6 @@ class BaseDao
         $query = substr($query, 0, -2);
         $values = substr($values, 0, -2);
         $query .=")".$values.")";
-
         $stmt = $this->connection->prepare($query);
         $stmt->execute($table);
     }

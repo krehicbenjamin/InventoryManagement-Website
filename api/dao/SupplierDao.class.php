@@ -21,7 +21,7 @@ class SupplierDao extends BaseDao
 
     public function insertSupplier($supplier)
     {
-        $this->insert($supplier, "suppliers");
+        $this->insert("suppliers", $supplier);
     }
 
     public function getAllSuppliers()
@@ -29,10 +29,10 @@ class SupplierDao extends BaseDao
         return $this->getAll("suppliers");
     }
 
-    public function searchSuppliersByName($search)
+    public function searchSuppliersByName($search, $offset, $limit)
     {
         return $this->query("SELECT * FROM suppliers
-                             WHERE name LIKE CONCAT('%', :name, '%')",
+                             WHERE name LIKE CONCAT('%', :name, '%') LIMIT ${limit} OFFSET ${offset}",
                              ["name" => $search]);
     }
 
