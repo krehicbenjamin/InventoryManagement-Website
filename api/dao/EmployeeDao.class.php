@@ -35,5 +35,10 @@ class EmployeeDao extends BaseDao
     {
       return $this->getAllPaginated("employees", $offset, $limit);
     }
+    
+    public function getEmployeesByEmail($email)
+    {
+      return $this->queryUnique("SELECT * FROM employees WHERE email = :email", ["email" => $email]);
+    }
 
 }

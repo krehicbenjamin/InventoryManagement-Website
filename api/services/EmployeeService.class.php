@@ -36,4 +36,27 @@ class EmployeeService extends BaseService
     {
         return parent::getById($id);
     }
+
+    public function login($customer){
+        $db_user = $this->dao->getEmployeesByEmail($customer['email']);
+        if (!isset($db_user['id'])) throw new Exception("User doesn't exists", 400);
+        if ($db_user['password'] != md5($user['password'])) throw new Exception("Invalid password", 400);
+        return $db_user;
+      }
+    
+    public function register($user){
+        try {
+          $user = parent::add([
+            "name" => $user['name'],
+            "surname" => $user['surname'],
+            "email" => $user['email'],
+            "password" => md5($user['password']),
+            "role" => $user['role'],
+            "registered_at" => date(Config::DATE_FORMAT)
+          ]);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+        return $user;
+    }
 }
