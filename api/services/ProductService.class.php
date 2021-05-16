@@ -6,7 +6,7 @@ require_once dirname(__FILE__)."/../dao/SupplierDao.class.php";
 
 class ProductService extends BaseService
 {
-    private supplierDao;
+    private $supplierDao;
 
     public function __construct()
     {
