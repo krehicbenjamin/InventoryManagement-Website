@@ -25,8 +25,8 @@
  * )
  */
 Flight::route('POST /register', function(){
-    $data = Flight::request()->data->getData();
-    Flight::employeeService()->register($data);
+      Flight::employeeService()->register(Flight::request()->data->getData());
+      Flight::json(["message" => "Confirmation email has been sent, please confirm your account"]);
   });
 
 /**
@@ -45,5 +45,55 @@ Flight::route('POST /register', function(){
 Flight::route('POST /login', function(){
   Flight::json(Flight::jwt(Flight::employeeService()->login(Flight::request()->data->getData())));
 });
+
+
+Flight::route('GET /employees', function(){
+    Flight::json(Flight::employeeService()->getById(Flight::get('user')['id']));
+});
+
+
+/**
+ * @OA\Put(path="/employees/updateProduct",
+ *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="id", example=1),
+ *     @OA\Response(response="200", description="Update a user in the database corresponding to id")
+ * )
+ */
+Flight::route('PUT /employees/update', function(){
+    $user = Flight::employeeService()->update(Flight::get('user')['id'], Flight::request()->data->getData());
+    Flight::json($user);
+});
+
+/**
+ * @OA\Get(path="/users/confirm/{token}",
+ *     @OA\Parameter(@OA\Schema(type="integer"), in="path", allowReserved=true, name="token", example=1),
+ *     @OA\Response(response="200", description="Activate a user account")
+ * )
+ */
+Flight::route('GET /users/confirm/@token', function($token){
+    Flight::json(Flight::jwt(Flight::userService()->confirm($token)));
+});
+
+
+
+/**
+ * @OA\Get(path="/employees/forgot",
+ *     @OA\Response(response="200", description="Get recovery link for a forgotten password")
+ * )
+ */
+Flight::route('POST /employees/forgot', function(){
+    Flight::userService()->forgot(Flight::request()->data->getData());
+    Flight::json(["message" => "Recovery link has been sent to your email."]);
+});
+
+/**
+ * @OA\Get(path="/employees/reset",
+ *     @OA\Response(response="200", description="Reset password")
+ * )
+ */
+Flight::route('POST /employees/reset', function(){
+    Flight::json(Flight::jwt(Flight::userService()->reset(Flight::request()->data->getData())));
+});
+
+*/
 
 ?>

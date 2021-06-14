@@ -37,26 +37,90 @@ class EmployeeService extends BaseService
         return parent::getById($id);
     }
 
-    public function login($customer){
-        $db_user = $this->dao->getEmployeesByEmail($customer['email']);
-        if (!isset($db_user['id'])) throw new Exception("User doesn't exists", 400);
-        if ($db_user['password'] != md5($user['password'])) throw new Exception("Invalid password", 400);
-        return $db_user;
-      }
-    
-    public function register($user){
-        try {
-          $user = parent::add([
-            "name" => $user['name'],
-            "surname" => $user['surname'],
-            "email" => $user['email'],
-            "password" => md5($user['password']),
-            "role" => $user['role'],
-            "registered_at" => date(Config::DATE_FORMAT)
+    public function register($employee)
+      {
+          if(!isset($employee['employeename'])){
+              throw new \Exception("Employeename is required", 1);
+          }
+
+          $token = md5(random_bytes(16));
+
+          $u = parent::add([
+            'name' => $employee['name'],
+            'surname' => $employee['surname'],
+            'email' => $employee['email'],
+            'password' => md5($employee['password']),
+            'employeename' => $employee['employeename'],
+            'token' => $token,
+            'token_created_at' => date(Config::DATE_FORMAT)
           ]);
-        } catch (\Exception $e) {
-            throw $e;
+          $message = "http://localhost/SE_project/api/confirm/".$token;
+          $mail = new Mailer();
+          $mail->mailer($employee['email'], $message, "Validation token");
+
+          return $u;
+      }
+
+      public function confirm($token)
+      {
+          $employee = $this->dao->getEmployeeByToken($token);
+
+          if(!isset($employee['id'])){
+            throw new \Exception("Invalid token");
+          }
+
+          $this->dao->update($employee['id'], ['status' => "ACTIVE", 'token' => null, 'token_created_at' => date(Config::DATE_FORMAT)]);
+          return $employee;
+      }
+
+      public function login($employee)
+      {
+          $db_employee = $this->dao->getEmployeeByEmail($employee['email']);
+
+          if (!isset($db_employee['id'])) throw new Exception("Employee doesn't exist", 400);
+
+          if ($db_employee['status'] != 'ACTIVE') throw new Exception("Account not active", 400);
+
+          if ($db_employee['password'] != md5($employee['password'])) throw new Exception("Invalid password", 400);
+
+          return $db_employee;
+      }
+
+      public function forgot($employee)
+      {
+          $employeeDB = $this->dao->getEmployeeByEmail($data['email']);
+          if(!isset($employeeDB['id']))
+          {
+              throw new \Exception("There's no account with that email", 400);
+          }
+
+          if((strtotime(date(Config::DATE_FORMAT)) - strtotime($employeeDB['token_created_at'])) / 60 < 5)
+          {
+              throw new \Exception("Maybe you should write your password down somewhere safe. Try reseting in a few minutes.", 400);
+          }
+          $employeeDB = $this->update($employeeDB['id'], ['token' => md5(random_bytes(16)), 'token_created_at' => date(Config::DATE_FORMAT)]);
+
+          $message = "Hi ".$employeeDB['employeename'].", It seems like you've forgotten your password. If you haven't made this request, ignore this email. Here's your recovery token: ".$employeeDB['token'];
+
+          $mail = new Mailer();
+          $mail->mailer($employeeDB['email'], $message, "Reset password");
+
+    }
+      public function reset($employee)
+      {
+        $employeeDB = $this->dao->getEmployeeByToken($employee['token']);
+        if(!isset($employeeDB['id']))
+        {
+            throw new \Exception("Invalid token", 400);
         }
-        return $user;
+
+        if((strtotime(date(Config::DATE_FORMAT)) - strtotime($employeeDB['token_created_at'])) / 60 > 30)
+        {
+            throw new \Exception("Token expired", 400);
+
+        }
+
+        $this->update($employeeDB['id'], ['password' => md5($employee['password']), 'token' => null]);
+        return $employeeDB;
     }
 }
