@@ -2,7 +2,7 @@
 
 /**
  * @OA\Get(path="/articles",
- *  @OA\Response(response="200", description="Get all employees")
+ *  @OA\Response(response="200", description="Get all products")
  * )
  */
 Flight::route('GET /products', function(){
@@ -12,7 +12,7 @@ Flight::route('GET /products', function(){
 
 /**
  * @OA\Get(path="/articles/{id}",
- *  @OA\Response(response="200", description="Get all employees")
+ *  @OA\Response(response="200", description="Get all products")
  * )
  */
 Flight::route('GET /products/@id', function($id){
@@ -31,7 +31,7 @@ Flight::route('GET /products/@id', function($id){
  *          )
  *       )
  *     ),
- *  @OA\Response(response="200", description="Message that user has been legged in.")
+ *  @OA\Response(response="200", description="Succesfully added new product")
  * )
  */
 Flight::route('POST /products', function(){
