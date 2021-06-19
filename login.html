@@ -41,8 +41,8 @@
                                     <div class="form-group">
                                       <button id="login-link" onclick="doLogin();" class="btn btn-lg btn-primary btn-block" type="button">Login</button>
                                     </div>
-                                   
-                                    
+
+
                                 </fieldset>
                             </form>
                             <a href="register.html"> <button id="login-link"  class="btn btn-lg btn-success btn-block">Register</button></a>
@@ -73,7 +73,7 @@
                      'password' : $('#password').val()
                 }
                 $("login-link").prop('disabled', true);
-                $.post("http://localhost:8082/SE_project/api/login", login_info).done(function(data){
+                $.post("/SE_project/api/login", login_info).done(function(data){
                     console.log(data.token);
                     window.localStorage.setItem("token", data.token);
                     window.location = "index.html";
@@ -81,10 +81,10 @@
                     $("login-link").prop('disabled', false);
                     alert("error");
                 });
-            
+
             }
-                
+
         </script>
-          
+
     </body>
 </html>
