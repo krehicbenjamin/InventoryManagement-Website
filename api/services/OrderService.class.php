@@ -31,9 +31,9 @@ class OrderService extends BaseService
         }
     }
 
-    public function add($order)
+    public function insertOrder($order)
     {
-        if(!isset($order['name'])) throw new \Exception("Name is missing", 1);
+      $order['date'] = date(Config::DATE_FORMAT);
         return parent::add($order);
     }
 
