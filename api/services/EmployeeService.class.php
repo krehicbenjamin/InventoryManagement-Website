@@ -39,25 +39,25 @@ class EmployeeService extends BaseService
 
     public function register($employee)
       {
-          if(!isset($employee['employeename'])){
-              throw new \Exception("Employeename is required", 1);
-          }
-
-          $token = md5(random_bytes(16));
+          
+          try
+          {
 
           $u = parent::add([
             'name' => $employee['name'],
             'surname' => $employee['surname'],
             'email' => $employee['email'],
             'password' => md5($employee['password']),
-            'employeename' => $employee['employeename'],
-            'token' => $token,
-            'token_created_at' => date(Config::DATE_FORMAT)
+            'role' => 'EMPLOYEE',
+            'phone' => $employee['phone'],
+            'registered_at' => date(Config::DATE_FORMAT)
           ]);
-          $message = "http://localhost/SE_project/api/confirm/".$token;
-          $mail = new Mailer();
-          $mail->mailer($employee['email'], $message, "Validation token");
-
+        } catch(\Exception $e) {
+        
+            throw $e;
+          
+      }
+          
           return $u;
       }
 
@@ -78,9 +78,6 @@ class EmployeeService extends BaseService
           $db_employee = $this->dao->getEmployeeByEmail($employee['email']);
 
           if (!isset($db_employee['id'])) throw new Exception("Employee doesn't exist", 400);
-
-          if ($db_employee['status'] != 'ACTIVE') throw new Exception("Account not active", 400);
-
           if ($db_employee['password'] != md5($employee['password'])) throw new Exception("Invalid password", 400);
 
           return $db_employee;
