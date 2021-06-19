@@ -38,4 +38,9 @@ class CustomerService extends BaseService
         return parent::getById($id);
     }
 
+    public function getAllCustomers()
+    {
+      return $this->dao->getAllCustomers();
+    }
+
 }

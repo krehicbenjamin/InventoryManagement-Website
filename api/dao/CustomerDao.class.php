@@ -19,7 +19,8 @@ class CustomerDao extends BaseDao
         return $this->insert("customers", $customer);
     }
 
-    public function getAllCustomers(){
+    public function getAllCustomers()
+    {
         return $this->getAll("customers");
     }
 

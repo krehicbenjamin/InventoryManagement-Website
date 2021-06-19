@@ -6,7 +6,7 @@
  * )
  */
 Flight::route('GET /customers', function(){
-    Flight::json(Flight::articleService()->getAll());
+    Flight::json(Flight::customerService()->getAllCustomers());
 });
 
 
