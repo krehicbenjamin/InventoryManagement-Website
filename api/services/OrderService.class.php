@@ -46,4 +46,9 @@ class OrderService extends BaseService
     {
         return parent::getById($id);
     }
+
+    public function getAllOrders()
+    {
+      return $this->dao->getAllOrders();
+    }
 }
