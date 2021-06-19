@@ -22,7 +22,7 @@ class CustomerService extends BaseService
         }
     }
 
-    public function add($customer)
+    public function insertCustomer($customer)
     {
         if(!isset($customer['name'])) throw new \Exception("Name is missing", 1);
         return parent::add($customer);
@@ -36,6 +36,11 @@ class CustomerService extends BaseService
     public function getById($id)
     {
         return parent::getById($id);
+    }
+
+    public function getAllCustomers()
+    {
+      return $this->dao->getAllCustomers();
     }
 
 }

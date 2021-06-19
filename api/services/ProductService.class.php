@@ -26,7 +26,7 @@ class ProductService extends BaseService
         }
     }
 
-    public function add($product)
+    public function insertProduct($product)
     {
         if(!isset($product['name'])) throw new \Exception("Name is missing", 1);
         $supplier = $this->supplierDao->getSuppliersByName($product['supplier_name']);
@@ -46,5 +46,10 @@ class ProductService extends BaseService
     public function getById($id)
     {
         return parent::getById($id);
+    }
+
+    public function getAllProducts()
+    {
+      return $this->dao->getAllProducts();
     }
 }

@@ -23,9 +23,11 @@ class EmployeeService extends BaseService
     }
 
 
-    public function getAllEmployees(){
+    public function getAllEmployees()
+    {
       return $this->dao->getAllEmployees();
     }
+
     public function add($employee)
     {
         if(!isset($employee['name'])) throw new \Exception("Name is missing", 1);

@@ -22,7 +22,7 @@ class SupplierService extends BaseService
         }
     }
 
-    public function add($supplier)
+    public function insertSupplier($supplier)
     {
         if(!isset($supplier['name'])) throw new \Exception("Name is missing", 1);
         return parent::add($supplier);
@@ -36,5 +36,10 @@ class SupplierService extends BaseService
     public function getById($id)
     {
         return parent::getById($id);
+    }
+
+    public function getAllSuppliers()
+    {
+      return $this->dao->getAllSuppliers();
     }
 }
