@@ -7,13 +7,10 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Startmin - Bootstrap Admin Theme</title>
+        <title>NetBug Login</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
-
-        <!-- MetisMenu CSS -->
-        <link href="./assets/css/metisMenu.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
         <link href="./assets/css/startmin.css" rel="stylesheet">
@@ -21,24 +18,19 @@
         <!-- Custom Fonts -->
         <link href="./assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" type="text/css">
     </head>
-    <body style="display:none">
+    <body>
 
         <div class="container">
-            <div class="row">
+            <div id="login-form-container" class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Please Sign In</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="form">
+                            <form id="login-form" role="form">
                                 <fieldset>
                                     <div class="form-group">
                                         <input id="email" class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
@@ -46,10 +38,14 @@
                                     <div class="form-group">
                                         <input id="password" class="form-control" placeholder="Password" name="password" type="password" value="">
                                     </div>
-                                    <!-- Change this to a button or input when using this as a form -->
-                                    <button id="login-link" onclick="doLogin();" class="btn btn-lg btn-success btn-block">Login</button>
+                                    <div class="form-group">
+                                      <button id="login-link" onclick="doLogin();" class="btn btn-lg btn-primary btn-block" type="button">Login</button>
+                                    </div>
+                                   
+                                    
                                 </fieldset>
                             </form>
+                            <a href="register.html"> <button id="login-link"  class="btn btn-lg btn-success btn-block">Register</button></a>
                         </div>
                     </div>
                 </div>
@@ -58,33 +54,37 @@
 
         <!-- jQuery -->
         <script src="./assets/js/jquery.min.js"></script>
-
         <!-- Bootstrap Core JavaScript -->
         <script src="./assets/js/bootstrap.min.js"></script>
 
-        <script type="text/javascript">
 
-            $(function(){
-              if(window.localStorage.getItem("token")){
-              window.location ="index.html";
-            }else {
-              $('body').show();
-            }
-            });
+
+        <script src="./assets/js/utils.js"></script>
+        <!--<script src="./assets/js//controllers/login.js"></script>-->
+
+
+        <!-- Toastr JS -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <script type="text/javascript">
             function doLogin(){
-              var loginInfo = {
-                "email" : $("#email").val(),
-                "password" : $("#password").val()
-              };
-              $("#login-link").prop('disabled',true);
-                $.post("http://localhost/SE_project/api/login",loginInfo).done(function(data) {
-                  window.localStorage.setItem("token", data.token);
-                  window.location = "index.html";
-                }).fail(function() {
-                    alert( "error" );
-                    $("#login-link").prop('disabled',false);
+                var login_info = {
+                     'email' : $('#email').val(),
+                     'password' : $('#password').val()
+                }
+                $("login-link").prop('disabled', true);
+                $.post("http://localhost:8082/SE_project/api/login", login_info).done(function(data){
+                    console.log(data.token);
+                    window.localStorage.setItem("token", data.token);
+                    window.location = "index.html";
+                }).fail(function(error){
+                    $("login-link").prop('disabled', false);
+                    alert("error");
                 });
+            
             }
+                
         </script>
+          
     </body>
 </html>
