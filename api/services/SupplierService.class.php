@@ -37,4 +37,9 @@ class SupplierService extends BaseService
     {
         return parent::getById($id);
     }
+
+    public function getAllSuppliers()
+    {
+      return $this->dao->getAllSuppliers();
+    }
 }
