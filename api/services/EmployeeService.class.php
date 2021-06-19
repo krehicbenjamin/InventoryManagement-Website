@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 require_once dirname(__FILE__)."/../dao/EmployeeDao.class.php";
+require_once dirname(__FILE__)."/BaseService.class.php";
 
 class EmployeeService extends BaseService
 {
@@ -21,6 +22,10 @@ class EmployeeService extends BaseService
         }
     }
 
+
+    public function getAllEmployees(){
+      return $this->dao->getAllEmployees();
+    }
     public function add($employee)
     {
         if(!isset($employee['name'])) throw new \Exception("Name is missing", 1);
@@ -39,7 +44,7 @@ class EmployeeService extends BaseService
 
     public function register($employee)
       {
-          
+
           try
           {
 
@@ -53,11 +58,11 @@ class EmployeeService extends BaseService
             'registered_at' => date(Config::DATE_FORMAT)
           ]);
         } catch(\Exception $e) {
-        
+
             throw $e;
-          
+
       }
-          
+
           return $u;
       }
 

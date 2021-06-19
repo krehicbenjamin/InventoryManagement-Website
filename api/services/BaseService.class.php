@@ -17,5 +17,9 @@ class BaseService {
         $this->dao->update($id, $data);
         return $this->dao->getById($id);
     }
+
+    public function getAll(){
+      $this->dao->getAll();
+    }
 }
  ?>

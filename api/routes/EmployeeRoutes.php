@@ -8,6 +8,10 @@
  * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authentication" )
  */
 
+ ini_set('display_errors', 1);
+ ini_set('display_startup_errors', 1);
+ error_reporting(E_ALL);
+
 /**
  * @OA\Post(path="/register", tags={"register"},
  *   @OA\RequestBody(description="Basic employee info", required=true,
@@ -23,7 +27,7 @@
  *     ),
  *  @OA\Response(response="200", description="Message that user has been created.")
  * )
- */                  
+ */
 Flight::route('POST /register', function(){
     $request = Flight::request();
     $data = $request->data->getData();
@@ -49,12 +53,21 @@ Flight::route('POST /login', function(){
 });
 
 /**
+ * @OA\Get(path="/employees/{id}",
+ *  @OA\Response(response="200", description="Get all employees")
+ * )
+ */
+Flight::route('GET /employee', function(){
+    Flight::json(Flight::employeeService()->getById(Flight::get('user')['id']));
+});
+
+/**
  * @OA\Get(path="/employees",
  *  @OA\Response(response="200", description="Get all employees")
  * )
  */
 Flight::route('GET /employees', function(){
-    Flight::json(Flight::employeeService()->getById(Flight::get('user')['id']));
+    Flight::json(Flight::employeeService()->getAllEmployees());
 });
 
 

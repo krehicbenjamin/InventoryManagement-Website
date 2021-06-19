@@ -4,8 +4,10 @@
  error_reporting(E_ALL);
 
  require dirname(__FILE__)."/../vendor/autoload.php";
+ use \Firebase\JWT\JWT;
 
- 
+
+
 Flight::route('GET /swagger', function(){
   $openapi = @\OpenApi\scan(dirname(__FILE__)."/routes");
   header('Content-Type: application/json');
@@ -51,11 +53,11 @@ require_once dirname(__FILE__)."/routes/SupplierRoutes.php";
 
 /* require BLL */
 
-require_once dirname(__FILE__)."/services/CustomerService.class.php";   
+require_once dirname(__FILE__)."/services/CustomerService.class.php";
 require_once dirname(__FILE__)."/services/EmployeeService.class.php";
-require_once dirname(__FILE__)."/services/OrderService.class.php";   
+require_once dirname(__FILE__)."/services/OrderService.class.php";
 require_once dirname(__FILE__)."/services/ProductService.class.php";
-require_once dirname(__FILE__)."/services/SupplierService.class.php";   
+require_once dirname(__FILE__)."/services/SupplierService.class.php";
 
 
 /* register services */

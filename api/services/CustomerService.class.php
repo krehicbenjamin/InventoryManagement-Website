@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__)."/../dao/BaseDao.class.php";
 require_once dirname(__FILE__)."/../dao/CustomerDao.class.php";
+require_once dirname(__FILE__)."/BaseService.class.php";
 
 class CustomerService extends BaseService
 {
