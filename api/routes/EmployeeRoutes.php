@@ -23,11 +23,13 @@
  *     ),
  *  @OA\Response(response="200", description="Message that user has been created.")
  * )
- */
+ */                  
 Flight::route('POST /register', function(){
-      Flight::employeeService()->register(Flight::request()->data->getData());
-      Flight::json(["message" => "Confirmation email has been sent, please confirm your account"]);
-  });
+    $request = Flight::request();
+    $data = $request->data->getData();
+    Flight::employeeService()->register($data);
+    Flight::json(["message" => "Account created."]);
+});
 
 /**
  * @OA\Post(path="/login", tags={"login"},
@@ -98,6 +100,6 @@ Flight::route('POST /reset', function(){
     Flight::json(Flight::jwt(Flight::userService()->reset(Flight::request()->data->getData())));
 });
 
-*/
+
 
 ?>
