@@ -47,4 +47,9 @@ class ProductService extends BaseService
     {
         return parent::getById($id);
     }
+
+    public function getAllProducts()
+    {
+      return $this->dao->getAllProducts();
+    }
 }
