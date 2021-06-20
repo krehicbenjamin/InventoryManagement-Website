@@ -1,4 +1,4 @@
-<div id="page-wrapper">
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -6,7 +6,11 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <button class="btn btn-success md" onclick="openModalProduct();"> + </button>
+        <div class="row">
+            <button style="margin-left: 5px;" type="button" class="btn btn-success" data-toggle="modal" data-target="#add-email-template-modal">
+                + Add
+            </button>
+          </div>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
@@ -46,13 +50,47 @@
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
-</div>
+
 <!-- /#page-wrapper -->
 
+<div class="modal fade" id="add-email-template-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form role="form" id="add-email-template">
+            <input type="hidden" name="id" />
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Add Email Template</h4>
+            </div>
+            <div class="modal-body">
+                  <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" name="name" class="form-control" placeholder="Name of the email template" required minlength="3">
+                  </div>
+                  <div class="form-group">
+                      <label>Email Subject</label>
+                      <input type="text" name="subject" class="form-control" placeholder="Enter text" required minlength="3">
+                  </div>
+
+                  <div class="form-group">
+                      <label>Email Body</label>
+                      <textarea name="body" class="form-control" rows="10" required></textarea>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
 
 <script type="text/javascript">
-get_all_supp()
+get_all_supp();
     function get_all_supp(){
       $.ajax({
       url: 'api/suppliers',
