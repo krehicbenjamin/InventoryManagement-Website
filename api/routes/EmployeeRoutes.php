@@ -3,7 +3,7 @@
  * @OA\Info(title="SE_PROJECT API", version="1.0")
  * @OA\OpenApi(
  *    @OA\Server(url="http://localhost/SE_PROJECT/api/", description="Development Environment" ),
- *    @OA\Server(url="https://", description="Production Environment" )
+ *    @OA\Server(url="https://seproject-amela-benjamin.herokuapp.com/api/", description="Production Environment" )
  * ),
  * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authentication" )
  */
