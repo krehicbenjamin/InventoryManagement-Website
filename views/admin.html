@@ -165,8 +165,8 @@
         
       
       <div class="item">
-        <p>Customer id</p>
-        <input id="cid" type="text" name="name" placeholder="Customer id" required/>
+        <p>Customer name</p>
+        <input id="customer_name" type="text" name="name" placeholder="Customer Name" required/>
         <p>Product name</p>
         <input id="name1" type="text" name="name" placeholder="Name" required/>
         <p>Product quantity</p>
@@ -313,7 +313,7 @@
    function doAddOrder(){
         var order_info =
             {
-            'customer_id' : $('#cid').val(),
+            'customer_name' : $('#customer_name').val(),
             'products' : [
                 {
                     'name' : $('#name1').val(),
