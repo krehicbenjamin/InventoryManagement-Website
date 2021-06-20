@@ -73,7 +73,7 @@
                      'password' : $('#password').val()
                 }
                 $("login-link").prop('disabled', true);
-                $.post("/SE_project/api/login", login_info).done(function(data){
+                $.post("api/login", login_info).done(function(data){
                     console.log(data.token);
                     window.localStorage.setItem("token", data.token);
                     window.location = "index.html";
