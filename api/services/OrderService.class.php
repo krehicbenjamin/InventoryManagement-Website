@@ -33,8 +33,16 @@ class OrderService extends BaseService
 
     public function insertOrder($order)
     {
-      $order['date'] = date(Config::DATE_FORMAT);
-        return parent::add($order);
+      $customer = $this->customerDao->getCustomerByName($order["customer_name"]);
+      $product =  $this->productDao->getProductByName($order["product_name"]);
+      $orderToBeInserted = [
+        "customer_id" => $customer['id'],
+        "product_id" => $product['id'],
+        "quantity" => $order["quantity"],
+        "employee_id" => 1,
+        "date" => date(Config::DATE_FORMAT)
+      ];
+        return parent::add($orderToBeInserted);
     }
 
     public function update($id, $order)

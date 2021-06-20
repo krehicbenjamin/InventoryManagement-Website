@@ -14,6 +14,11 @@ class CustomerDao extends BaseDao
         return $this->queryUnique("SELECT * FROM customers WHERE id = :id", ["id" => $id]);
     }
 
+    public function getCustomerByName($name)
+    {
+        return $this->queryUnique("SELECT * FROM customers WHERE name = :name", ["name" => $name]);
+    }
+
     public function insertCustomer($customer)
     {
         return $this->insert("customers", $customer);
