@@ -17,7 +17,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th> ID</th>
@@ -28,7 +28,7 @@
                                         <th>PHONE</th>
                                     </tr>
                                 </thead>
-                                <tbody id="emplyees">
+                                <tbody id="employees-table">
                                     
                                 </tbody>
                             </table>
@@ -51,7 +51,7 @@
 
 
 <script type="text/javascript">
-get_all_employees();
+    get_all_employees();
     function get_all_employees(){
       $.ajax({
       url: 'api/employees',
@@ -64,7 +64,7 @@ get_all_employees();
             html += '<tr><th>'+data[i].id+'</th><th>'+data[i].name+'</th><th>'+data[i].surname+'</th><th>'+data[i].role+'</th><th>'+data[i].registered_at+'</th><th>'+data[i].phone+'</th></tr>';
               
           }
-          $("#employees").html(html);
+          $("#employees-table").html(html);
           //$("#employees").DataTable();
       }
 
