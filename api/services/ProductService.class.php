@@ -38,9 +38,9 @@ class ProductService extends BaseService
         ]);
     }
 
-    public function update($id, $product)
+    public function updateProduct($id, $product)
     {
-        return parent::update($id, $product);
+        return $this->dao->updateProduct($id, $product);
     }
 
     public function getById($id)
@@ -64,6 +64,6 @@ class ProductService extends BaseService
         if($product['current_quantity'] == 0){
             $product['status'] = "OUT OF STOCK";
         }
-        $this->update($id, $product);
+        $this->updateProduct($id, $product);
     }
 }

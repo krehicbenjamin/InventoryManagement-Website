@@ -41,19 +41,20 @@ class OrderService extends BaseService
     {
 
         $customer = $this->customerDao->getCustomerByName($order["customer_name"]);
-        $products =  $order['products'];
+        $products =  $order["products"];
 
-        foreach ($products as $name => $quantity) {
-          $product = $this->productDao->getProductByName($name);
-          try {
-              $this->productService->sellProduct($product['id'], $quantity);
-          } catch (\Exception $e) {
-              throw new \Exception($e->getMessage(), 1);
-          }
+        foreach ($products as $p) {
+            $product = $this->productDao->getProductByName($p["name"]);
+            try {
+                $this->productService->sellProduct($product['id'], $p['quantity']);
+            } catch (\Exception $e) {
+                Flight::json($e->getMessage());
+            }
+
             $this->orderList->add(new Order(
               $customer['id'],
               $product['id'],
-              $quantity
+              $p["quantity"]
             ));
         }
         $orders = array();
