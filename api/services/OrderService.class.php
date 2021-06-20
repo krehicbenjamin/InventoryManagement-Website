@@ -6,18 +6,24 @@ require_once dirname(__FILE__)."/../dao/ProductDao.class.php";
 require_once dirname(__FILE__)."/../dao/CustomerDao.class.php";
 require_once dirname(__FILE__)."/../dao/EmployeeDao.class.php";
 require_once dirname(__FILE__)."/BaseService.class.php";
+require_once dirname(__FILE__)."/../components/OrderList.class.php";
+require_once dirname(__FILE__)."/ProductService.class.php";
 
 class OrderService extends BaseService
 {
     private $productDao;
     private $customerDao;
     private $employeeDao;
+    private $orderList;
+    private $productService;
     public function __construct()
     {
         $this->dao=new OrderDao();
         $this->productDao = new ProductDao();
         $this->customerDao = new CustomerDao();
         $this->employeeDao = new EmployeeDao();
+        $this->orderList = new OrderList();
+        $this->productService = new ProductService();
     }
 
     public function getOrders($search, $offset, $limit)
@@ -33,16 +39,30 @@ class OrderService extends BaseService
 
     public function insertOrder($order)
     {
-      $customer = $this->customerDao->getCustomerByName($order["customer_name"]);
-      $product =  $this->productDao->getProductByName($order["product_name"]);
-      $orderToBeInserted = [
-        "customer_id" => $customer['id'],
-        "product_id" => $product['id'],
-        "quantity" => $order["quantity"],
-        "employee_id" => 1,
-        "date" => date(Config::DATE_FORMAT)
-      ];
-        return parent::add($orderToBeInserted);
+
+        $customer = $this->customerDao->getCustomerByName($order["customer_name"]);
+        $products =  $order['products'];
+
+        foreach ($products as $name => $quantity) {
+          $product = $this->productDao->getProductByName($name);
+          try {
+              $this->productService->sellProduct($product['id'], $quantity);
+          } catch (\Exception $e) {
+              throw new \Exception($e->getMessage(), 1);
+          }
+            $this->orderList->add(new Order(
+              $customer['id'],
+              $product['id'],
+              $quantity
+            ));
+        }
+        $orders = array();
+        foreach ($this->orderList->getOrder() as $order) {
+            array_push($orders, parent::add($order->getOrder()));
+        }
+
+        return $orders;
+
     }
 
     public function update($id, $order)

@@ -26,7 +26,8 @@ class ProductDao extends BaseDao
 
     public function getAllProducts()
     {
-        return $this->getAll("products");
+        $status = "AVAILABLE";
+        return $this->query("SELECT * FROM products WHERE status = :status", ["status" => $status]);
     }
 
     public function searchProductsBySupplier($search, $offset, $limit)
@@ -45,5 +46,11 @@ class ProductDao extends BaseDao
     {
         $this->update($id, $product);
     }
+
+    public function getProductByName($name)
+    {
+        return $this->queryUnique("SELECT * FROM products WHERE name = :name", ["name" => $name]);
+    }
+
 
 }

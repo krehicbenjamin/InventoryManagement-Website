@@ -40,4 +40,8 @@ class CustomerDao extends BaseDao
       return $this->getAllPaginated("customers", $offset, $limit);
     }
 
+    public function getCustomerByName($name){
+        return $this->queryUnique("SELECT * FROM customers WHERE name = :name", ["name" => $name]);
+    }
+
 }
