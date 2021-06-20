@@ -22,12 +22,12 @@
                                     <tr>
                                         <th> ID</th>
                                         <th> NAME</th>
-                                        <th>ADDRESS</th>
-                                        <th>EMAIL</th>
-                                        <th>PHONE</th>
+                                        <th>QUANTITY</th>
+                                        <th>SUPPLIER</th>
+                                        <th>STATUS</th>
                                     </tr>
                                 </thead>
-                                <tbody id="customers">
+                                <tbody id="suppliers">
                                     
                                 </tbody>
                             </table>
@@ -52,21 +52,21 @@
 
 
 <script type="text/javascript">
-get_all_customers()
-    function get_all_customers(){
+get_all_supp()
+    function get_all_supp(){
       $.ajax({
-      url: 'api/customers',
+      url: 'api/suppliers',
       type: 'GET',
       beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem('token'));},
       success: function(data){
           var html = '';
           for(var i = 0; i < data.length; i++){
             
-            html += '<tr><th>'+data[i].id+'</th><th>'+data[i].name+'</th><th>'+data[i].address+'</th><th>'+data[i].email+'</th><th>'+data[i].phone+'</th></tr>';
+            html += '<tr><th>'+data[i].id+'</th><th>'+data[i].name+'</th><th>'+data[i].current_quantity+'</th><th>'+data[i].supplier_id+'</th><th>'+data[i].status+'</th></tr>';
               
           }
-          $("#customers").html(html);
-          //$("#customers").DataTable();
+          $("#suppliers").html(html);
+          //$("#products").DataTable();
       }
 
     });
