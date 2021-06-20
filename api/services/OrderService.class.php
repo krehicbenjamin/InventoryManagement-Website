@@ -39,6 +39,7 @@ class OrderService extends BaseService
 
     public function insertOrder($order)
     {
+
         $customer = $this->customerDao->getCustomerByName($order["customer_name"]);
         $products =  $order['products'];
 
@@ -61,6 +62,7 @@ class OrderService extends BaseService
         }
 
         return $orders;
+
     }
 
     public function update($id, $order)
