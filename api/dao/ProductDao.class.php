@@ -14,6 +14,11 @@ class ProductDao extends BaseDao
         return $this->queryUnique("SELECT * FROM products WHERE id = :id", ["id" => $id]);
     }
 
+    public function getProductByName($name)
+    {
+        return $this->queryUnique("SELECT * FROM products WHERE name = :name", ["name" => $name]);
+    }
+
     public function insertProduct($product)
     {
         $this->insert("products", $product);
