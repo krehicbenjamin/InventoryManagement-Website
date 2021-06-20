@@ -1,35 +1,33 @@
-<div id="page-wrapper">
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Products</h1>
-            </div>
+            <hr><hr><hr>
             <!-- /.col-lg-12 -->
         </div>
-        <button class="btn btn-success md" onclick="openModalProduct();"> + </button>
+        
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        List of products
+                        List of orders
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th> ID</th>
                                         <th> CUSTOMER ID</th>
                                         <th>PRODUCT ID</th>
                                         <th>QUANTITY</th>
-                                        <th>SUPPLIER ID</th>
+                                        
                                         <th> DATE</th>
                                         <th>EMPLOYEE ID</th>
                                     </tr>
                                 </thead>
-                                <tbody id="orders">
+                                <tbody id="orders-table">
                                     
                                 </tbody>
                             </table>
@@ -48,13 +46,11 @@
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
-</div>
+
 <!-- /#page-wrapper -->
 
-
-
 <script type="text/javascript">
-get_all_orders()
+get_all_orders();
     function get_all_orders(){
       $.ajax({
       url: 'api/orders',
@@ -64,11 +60,11 @@ get_all_orders()
           var html = '';
           for(var i = 0; i < data.length; i++){
             
-            html += '<tr><th>'+data[i].id+'</th><th>'+data[i].customer_id+'</th><th>'+data[i].product_id+'</th><th>'+data[i].quantity+'</th><th>'+data[i].supplier_id+'</th><th>'+data[i].date+'</th><th>'+data[i].employee_id+'</th></tr>';
+            html += '<tr><th>'+data[i].id+'</th><th>'+data[i].customer_id+'</th><th>'+data[i].product_id+'</th><th>'+data[i].quantity+'</th><th>'+data[i].date+'</th><th>'+data[i].employee_id+'</th></tr>';
               
           }
-          $("#orders").html(html);
-          //$("#orders").DataTable();
+          $("#orders-table").html(html);
+          
       }
 
     });

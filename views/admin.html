@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+      html, body {
+      min-height: 100%;
+      }
+      body, div, form, input, select, textarea, p { 
+      padding: 0;
+      margin: 0;
+      outline: none;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      line-height: 22px;
+      }
+      h1 {
+      position: absolute;
+      margin: 0;
+      line-height: 55px;
+      font-size: 55px;
+      color: #fff;
+      z-index: 2;
+      }
+      .testbox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: inherit;
+      padding: 20px;
+      }
+      form {
+      width: 100%;
+      padding: 20px;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 0 30px 0 #a37547; 
+      }
+      .banner {
+      position: relative;
+      height: 230px;
+      background-image: url("/uploads/media/default/0001/02/3dd647f39593e88f45f61aaac6ff3027dce15506.jpeg");  
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      }
+      .banner::after {
+      content: "";
+      background-color: rgba(0, 0, 0, 0.4); 
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      }
+      input, select, textarea {
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      }
+      input {
+      width: calc(100% - 10px);
+      padding: 5px;
+      }
+      select {
+      width: 100%;
+      padding: 7px 0;
+      background: transparent;
+      }
+      textarea {
+      width: calc(100% - 12px);
+      padding: 5px;
+      }
+      .item:hover p, .item:hover i, .question:hover p, .question label:hover, input:hover::placeholder {
+      color: #a37547;
+      }
+      .item input:hover, .item select:hover, .item textarea:hover {
+      border: 1px solid transparent;
+      box-shadow: 0 0 6px 0 #a37547;
+      color: #a37547;
+      }
+      .item {
+      position: relative;
+      margin: 10px 0;
+      }
+      input[type=radio], input[type=checkbox]  {
+      display: none;
+      }
+      label.radio {
+      position: relative;
+      display: inline-block;
+      margin: 5px 20px 15px 0;
+      cursor: pointer;
+      }
+      .question span {
+      margin-left: 30px;
+      }
+      label.radio:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      }
+      input[type=radio]:checked + label:before, label.radio:hover:before {
+      border: 2px solid #a37547;
+      }
+      label.radio:after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 5px;
+      width: 8px;
+      height: 4px;
+      border: 3px solid #a37547;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+      opacity: 0;
+      }
+      input[type=radio]:checked + label:after {
+      opacity: 1;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 150px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px; 
+      background: #6b4724;
+      font-size: 16px;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      box-shadow: 0 0 18px 0 #3d2914;
+      }
+      @media (min-width: 568px) {
+      .name-item, .city-item {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      }
+      .name-item input, .city-item input {
+      width: calc(50% - 20px);
+      }
+      .city-item select {
+      width: calc(50% - 8px);
+      }
+      }
+    </style>
+  </head>
+  
+    <div class="testbox">
+    <form id="order_form" role="form">
+     <fieldset>
+        
+      
+      <div class="item">
+        <p>Customer name</p>
+        <input id="customer_name" type="text" name="name" placeholder="Customer Name" required/>
+        <p>Product name</p>
+        <input id="name1" type="text" name="name" placeholder="Name" required/>
+        <p>Product quantity</p>
+        <input id="quantity1" type="text" name="name" placeholder="Quantity" required/>
+        
+      </div>
+      <hr>
+
+      <div class="item">
+        <p>Product name</p>
+        <input id="name2" type="text" name="name" placeholder="Name" />
+        <p>Product quantity</p>
+        <input id="quantity2" type="text" name="name" placeholder="Quantity" >
+        
+      </div>
+      <hr>
+
+      <div class="item">
+        <p>Product name</p>
+        <input id="name3" type="text" name="name" placeholder="Name" />
+        <p>Product quantity</p>
+        <input id="quantity3" type="text" name="name" placeholder="Quantity" />
+        
+        
+      </div>
+
+      <div class="item">
+        <p>Product name</p>
+        <input id="name4" type="text" name="name" placeholder="Name" />
+        <p>Product quantity</p>
+        <input id="quantity4" type="text" name="name" placeholder="Quantity" />
+        
+        
+      </div>
+     
+      
+      <div class="item">
+        
+        <button type="submit" onclick="doAddOrder()"> ADD ORDER </button>
+      </div>
+    </fieldset>
+    </form>
+    </div>
+
+
+
+    <hr>
+
+
+
+    <div class="testbox">
+        <form id="product_form" role="form">
+         <fieldset>
+            
+          
+          <div class="item">
+            <p>Product name</p>
+            <input id="pname" type="text" name="name" placeholder="Name" required/>
+            <p>Product quantity</p>
+            <input id="pquantity" type="text" name="name" placeholder="Quantity" required/>
+            <p>Product supplier</p>
+            <input id="psupplier" type="text" name="name" placeholder="Supplier" required/>
+            
+          </div>  
+            
+          
+         
+          
+          <div class="item">
+            
+            <button type="submit" onclick="doAddProduct()"> ADD PRODUCT </button>
+          </div>
+        </fieldset>
+        </form>
+    </div>
+
+    <hr>
+
+
+    <div class="testbox">
+        <form id="customer_form" role="form">
+         <fieldset>
+            
+          
+          <div class="item">
+            <p>Customer name</p>
+            <input id="cname" type="text" name="name" placeholder="Name" required/>
+            <p>Customer address</p>
+            <input id="caddress" type="text" name="name" placeholder="Address" required/>
+            <p>Customer email</p>
+            <input id="cemail" type="text" name="name" placeholder="Email" required/>
+            <p>Customer phone</p>
+            <input id="cphone" type="text" name="name" placeholder="Phone" required/>
+            
+          </div>  
+            
+          
+         
+          
+          <div class="item">
+            
+            <button type="submit" onclick="doAddCustomer()"> ADD CUSTOMER </button>
+          </div>
+        </fieldset>
+        </form>
+    </div>
+
+    <hr>
+
+    <div class="testbox">
+        <form id="supplier_form" role="form">
+         <fieldset>
+            
+          
+            <div class="item">
+                <p>Supplier name</p>
+                <input id="sname" type="text" name="name" placeholder="Name" required/>
+                <p>Supplier address</p>
+                <input id="saddress" type="text" name="name" placeholder="Address" required/>
+                <p>Supplier email</p>
+                <input id="semail" type="text" name="name" placeholder="Email" required/>
+                <p>Supplier phone</p>
+                <input id="sphone" type="text" name="name" placeholder="Phone" required/>
+                
+              </div>  
+            
+          
+         
+          
+          <div class="item">
+            
+            <button type="submit" onclick="doAddSupplier()"> ADD SUPPLIER </button>
+          </div>
+        </fieldset>
+        </form>
+    </div>
+
+    
+    
+ 
+
+    <script type="text/javascript">
+          
+   function doAddOrder(){
+        var order_info =
+            {
+            'customer_name' : $('#customer_name').val(),
+            'products' : [
+                {
+                    'name' : $('#name1').val(),
+                    'quantity' : $('#quantity1').val()
+                },
+                {
+                    'name' : $('#name2').val(),
+                    'quantity' : $('#quantity2').val()
+                },
+                {
+                    'name' : $('#name3').val(),
+                    'quantity' : $('#quantity3').val()
+                },
+                {
+                    'name' : $('#name4').val(),
+                    'quantity' : $('#quantity4').val()
+                },
+
+            ]
+            };
+    
+        
+        $.post("api/orders", order_info).done(function(data){
+            console.log(data);
+            //window.localStorage.setItem("token", data.token);
+            
+        }).fail(function(error){
+            alert(error.responseJSON.message);
+        });
+    
+    }
+
+    function doAddProduct(){
+        var product_info = {
+            'name' : $('#pname').val(),
+            'quantity' : $('#pquantity').val(),
+            'supplier' : $('#psupplier').val(),
+            
+        }
+       
+        $.post("api/products", product_info).done(function(data){
+            console.log(data);
+            //window.localStorage.setItem("token", data.token);
+            
+        }).fail(function(error){
+            alert(error.responseJSON.message);
+        });
+    
+    }
+
+    function doAddCustomer(){
+        var customer_info = {
+            'name' : $('#cname').val(),
+            'address' : $('#caddress').val(),
+            'email' : $('#cemail').val(),
+            'phone' : $('#cphone').val()
+            
+        }
+       
+        $.post("api/customer", customer_info).done(function(data){
+            console.log(data);
+            //window.localStorage.setItem("token", data.token);
+            
+        }).fail(function(error){
+            alert(error.responseJSON.message);
+        });
+    
+    }
+
+    function doAddSupplier(){
+        var supplier_info = {
+            'name' : $('#sname').val(),
+            'address' : $('#saddress').val(),
+            'email' : $('#semail').val(),
+            'phone' : $('#sphone').val()
+            
+        }
+       
+        $.post("api/suppliers", supplier_info).done(function(data){
+            console.log(data);
+            //window.localStorage.setItem("token", data.token);
+            
+        }).fail(function(error){
+            alert(error.responseJSON.message);
+        });
+    
+    }
+
+
+    
+
+  
+    
+
+</script>
