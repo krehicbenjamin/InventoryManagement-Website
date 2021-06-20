@@ -16,7 +16,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th> ID</th>
@@ -26,7 +26,7 @@
                                         <th>PHONE</th>
                                     </tr>
                                 </thead>
-                                <tbody id="customers">
+                                <tbody id="customers-table">
                                     
                                 </tbody>
                             </table>
@@ -64,7 +64,7 @@
             html += '<tr><th>'+data[i].id+'</th><th>'+data[i].name+'</th><th>'+data[i].address+'</th><th>'+data[i].email+'</th><th>'+data[i].phone+'</th></tr>';
               
           }
-          $("#customers").html(html);
+          $("#customers-table").html(html);
           //$("#customers").DataTable();
       }
 
