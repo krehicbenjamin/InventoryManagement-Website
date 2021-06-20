@@ -17,7 +17,7 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th> ID</th>
@@ -29,7 +29,7 @@
                                         <th>EMPLOYEE ID</th>
                                     </tr>
                                 </thead>
-                                <tbody id="orders">
+                                <tbody id="orders-table">
                                     
                                 </tbody>
                             </table>
@@ -65,8 +65,8 @@ get_all_orders();
             html += '<tr><th>'+data[i].id+'</th><th>'+data[i].customer_id+'</th><th>'+data[i].product_id+'</th><th>'+data[i].quantity+'</th><th>'+data[i].supplier_id+'</th><th>'+data[i].date+'</th><th>'+data[i].employee_id+'</th></tr>';
               
           }
-          $("#orders").html(html);
-          //$("#orders").DataTable();
+          $("#orders-table").html(html);
+          
       }
 
     });
