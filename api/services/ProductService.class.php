@@ -52,4 +52,18 @@ class ProductService extends BaseService
     {
       return $this->dao->getAllProducts();
     }
+
+    public function sellProduct($id, $quantity){
+        $product = $this->dao->getById($id);
+        if($quantity > $product['current_quantity']){
+            throw new \Exception("Not enough in stock, quantity available: ".$product['quantity'], 1);
+        }
+
+        $product['current_quantity'] = $product['current_quantity'] - $quantity;
+
+        if($product['current_quantity'] == 0){
+            $product['status'] = "OUT OF STOCK";
+        }
+        $this->update($id, $product);
+    }
 }
