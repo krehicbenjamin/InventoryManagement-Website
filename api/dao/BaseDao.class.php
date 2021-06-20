@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__)."/../config.php";
+require_once dirname(__FILE__)."/Database.php";
 
 class BaseDao
 {
@@ -10,13 +10,11 @@ class BaseDao
     public function __construct($table)
     {
         $this->table = $table;
-        try {
-          $this->connection = new PDO("mysql:host=".Config::DB_HOST.";dbname=".Config::DB_SCHEME, Config::DB_USERNAME, Config::DB_PASSWORD);
-          // set the PDO error mode to exception
-          $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
-          echo "Connection failed: " . $e->getMessage();
-        }
+        /* Get an object instance of the database */
+        $database_object = Database::getInstance();
+        /* Get a connection from the database object */
+        $this->connection = $database_object->getConnection();
+
     }
 
     protected function query($query, $parameter)
