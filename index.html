@@ -148,10 +148,16 @@
                                 <a href="#dashboard" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="#tables"><i class="fa fa-table fa-fw"></i> Tables</a>
+                                <a href="#products"><i class="fa fa-table fa-fw"></i> Products</a>
                             </li>
                             <li>
-                                <a href="#notifications"><i class="fa fa-table fa-fw"></i> Notifications</a>
+                                <a href="#employees"><i class="fa fa-table fa-fw"></i> Employees</a>
+                            </li>
+                            <li>
+                                <a href="#orders"><i class="fa fa-table fa-fw"></i> Orders</a>
+                            </li>
+                            <li>
+                                <a href="#customers"><i class="fa fa-table fa-fw"></i> Customers</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
@@ -240,9 +246,12 @@
                 </div>
             </nav>
             <main id="jqueryspapp" role="main">
-              <section id="dashboard" data-load="dashboard.html" ></section>
+              <section id="products" data-load="products.html" ></section>
+              <section id="employees" data-load="employees.html" ></section>
+              <section id="orders" data-load="orders.html" ></section>
+              <section id="customers" data-load="customers.html" ></section>
               <section id="notifications" data-load="notifications.html" ></section>
-              <section id="tables" data-load="tables.html" ></section>
+              <section id="dashboard" data-load="dashboard.html" ></section>
             </main>
 
 
@@ -273,7 +282,7 @@
 
         <script type="text/javascript">
           $(document).ready(function() {
-            var app = $.jQuerySPApp({defaultView  : "dashboard"}); // initialize
+            var app = $.jQuerySPApp({defaultView  : "products"}); // initialize
             // run app
             app.run();
 
