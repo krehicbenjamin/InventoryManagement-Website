@@ -57,7 +57,7 @@
 get_all()
     function get_all(){
       $.ajax({
-      url: 'api/products',
+      url: 'api/orders',
       type: 'GET',
       beforeSend: function(xhr){xhr.setRequestHeader('Authentication', localStorage.getItem('token'));},
       success: function(data){
